@@ -40,17 +40,8 @@ int main()
 		cout << "5. merge sort " << endl;
 		cin >> choice;
 
-		if (choice == 4)
-		{
-			s.arr[0] = 15;
-			for (int i = 1; i < s.size; i++)
-				s.arr[i] = i;
-		}
-		else
-		{
-			for (int i = 0; i < s.size; i++)
-				s.arr[i] = i + 1;
-		}
+		for (int i = 0; i < s.size; i++)
+			s.arr[i] = i + 1;
 
 		cout << "\n\nBest Case\n";
 		cout << "\n\nBefore sort\n";
@@ -156,12 +147,12 @@ int main()
 
 void sort::bubbleSort()
 {
-	s.count = 0;
+	count = 0;
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size - i - 1; j++)
 		{
-			s.count++;
+			count++;
 			if (arr[j] > arr[j + 1])
 			{
 				int temp = arr[j + 1];
@@ -174,7 +165,7 @@ void sort::bubbleSort()
 
 void sort::insertionSort()
 {
-	s.count = 0;
+	count = 0;
 	int xloc;
 	for (int i = 1; i <= size - 1; i++)
 	{
@@ -190,7 +181,7 @@ int sort::shiftval(int n)
 	int loc = 0, m = arr[n];
 	while (vacant > 0)
 	{
-		s.count++;
+		count++;
 		if (arr[vacant - 1] <= m)
 		{
 			loc = vacant;
@@ -204,14 +195,14 @@ int sort::shiftval(int n)
 
 void sort::selectionSort()
 {
-	s.count = 0;
+	count = 0;
 	int min;
 	for (int i = 0; i < size - 1; i++)
 	{
 		min = i;
 		for (int j = i + 1; j < size; j++)
 		{
-			s.count++;
+			count++;
 			if (arr[j] < arr[min])
 			{
 				min = j;
@@ -234,7 +225,6 @@ int sort::extendLargeRegion(int E[], int pivot, int lowVac, int high)
 		{
 			E[lowVac] = E[curr];
 			highVac = curr;
-			s.count++;
 			break;
 		}
 		curr--;
@@ -253,7 +243,6 @@ int sort::extendSmallRegion(int E[], int pivot, int low, int highVac)
 		{
 			E[highVac] = E[curr];
 			lowVac = curr;
-			s.count++;
 			break;
 		}
 		curr++;
@@ -268,6 +257,7 @@ int sort::partition(int E[], int pivot, int first, int last)
 	high = last;
 	while (low < high)
 	{
+		count++;
 		int highVac = extendLargeRegion(E, pivot, low, high);
 		int lowVac = extendSmallRegion(E, pivot, low + 1, highVac);
 		low = lowVac;
@@ -291,22 +281,22 @@ void sort::QS(int E[], int first, int last)
 
 void sort::merge(int a[], int low, int high, int mid)
 {
+	count = 0;
 	int i, j, k, temp[high - low + 1];
 	i = low;
 	k = 0;
 	j = mid + 1;
 	while (i <= mid && j <= high)
 	{
+		count++;
 		if (a[i] < a[j])
 		{
-			s.count++;
 			temp[k] = a[i];
 			k++;
 			i++;
 		}
 		else
 		{
-			s.count++;
 			temp[k] = a[j];
 			k++;
 			j++;
@@ -315,14 +305,14 @@ void sort::merge(int a[], int low, int high, int mid)
 
 	while (i <= mid)
 	{
-		s.count++;
+		count++;
 		temp[k] = a[i];
 		k++;
 		i++;
 	}
 	while (j <= high)
 	{
-		s.count++;
+		count++;
 		temp[k] = a[j];
 		k++;
 		j++;
