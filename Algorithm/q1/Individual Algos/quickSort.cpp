@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 using namespace std;
+int count = 0;
 
 int extendLargeRegion(int E[], int pivot, int lowVac, int high)
 {
@@ -13,6 +14,7 @@ int extendLargeRegion(int E[], int pivot, int lowVac, int high)
         {
             E[lowVac] = E[curr];
             highVac = curr;
+            count++;
             break;
         }
         curr--;
@@ -31,6 +33,7 @@ int extendSmallRegion(int E[], int pivot, int low, int highVac)
         {
             E[highVac] = E[curr];
             lowVac = curr;
+            count++;
             break;
         }
         curr++;
@@ -70,10 +73,15 @@ int main()
 {
     int size = 30;
     int arr[size];
-    int count = 0;
 
-    for (int i = 0; i < size; i++)
-        arr[i] = i + 1;
+    arr[0] = 15;
+    for (int i = 1; i < size; i++)
+    {
+        if (i >= 15)
+            arr[i] = i + 1;
+        else if (i < 15)
+            arr[i] = i;
+    }
 
     cout << "\n\nBest Case\n";
     cout << "\n\nBefore sort\n";

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 using namespace std;
+
 class sort
 {
 public:
@@ -12,12 +13,19 @@ public:
 	void insertionSort();
 	int shiftval(int);
 	void selectionSort();
+	int extendLargeRegion(int[], int, int, int);
+	int extendSmallRegion(int[], int, int, int);
+	int partition(int[], int, int, int);
+	void QS(int[], int, int);
+	void merge(int[], int, int, int);
+	void mergesort(int[], int, int);
 	sort()
 	{
 		size = 30;
 		count = 0;
 	}
 } s;
+
 int main()
 {
 	int choice;
@@ -28,10 +36,21 @@ int main()
 		cout << "1. bubble sort " << endl;
 		cout << "2. insertion sort " << endl;
 		cout << "3. selection sort " << endl;
+		cout << "4. quick sort " << endl;
+		cout << "5. merge sort " << endl;
 		cin >> choice;
 
-		for (int i = 0; i < s.size; i++)
-			s.arr[i] = i + 1;
+		if (choice == 4)
+		{
+			s.arr[0] = 15;
+			for (int i = 1; i < s.size; i++)
+				s.arr[i] = i;
+		}
+		else
+		{
+			for (int i = 0; i < s.size; i++)
+				s.arr[i] = i + 1;
+		}
 
 		cout << "\n\nBest Case\n";
 		cout << "\n\nBefore sort\n";
@@ -44,6 +63,16 @@ int main()
 			s.insertionSort();
 		else if (choice == 3)
 			s.selectionSort();
+		else if (choice == 4)
+		{
+			s.count = 0;
+			s.QS(s.arr, 0, s.size - 1);
+		}
+		else if (choice == 5)
+		{
+			s.count = 0;
+			s.mergesort(s.arr, 0, s.size - 1);
+		}
 
 		cout << "\n\nAfter sort\n";
 		for (int i = 0; i < s.size; i++)
@@ -66,6 +95,17 @@ int main()
 			s.insertionSort();
 		else if (choice == 3)
 			s.selectionSort();
+		else if (choice == 4)
+		{
+			s.count = 0;
+			s.QS(s.arr, 0, s.size - 1);
+		}
+		else if (choice == 5)
+		{
+			s.count = 0;
+			s.mergesort(s.arr, 0, s.size - 1);
+		}
+
 		cout << "\n\nAfter sort\n";
 		for (int i = 0; i < s.size; i++)
 			cout << "\t" << s.arr[i];
@@ -91,6 +131,16 @@ int main()
 				s.insertionSort();
 			else if (choice == 3)
 				s.selectionSort();
+			else if (choice == 4)
+			{
+				s.count = 0;
+				s.QS(s.arr, 0, s.size - 1);
+			}
+			else if (choice == 5)
+			{
+				s.count = 0;
+				s.mergesort(s.arr, 0, s.size - 1);
+			}
 
 			cout << "\n\nAfter sort\n";
 			for (int i = 0; i < s.size; i++)
@@ -170,5 +220,126 @@ void sort::selectionSort()
 			arr[i] = arr[min];
 			arr[min] = temp;
 		}
+	}
+}
+
+int sort::extendLargeRegion(int E[], int pivot, int lowVac, int high)
+{
+	int highVac, curr;
+	highVac = lowVac;
+	curr = high;
+	while (curr > lowVac)
+	{
+		if (E[curr] < pivot)
+		{
+			E[lowVac] = E[curr];
+			highVac = curr;
+			s.count++;
+			break;
+		}
+		curr--;
+	}
+	return highVac;
+}
+
+int sort::extendSmallRegion(int E[], int pivot, int low, int highVac)
+{
+	int lowVac, curr;
+	lowVac = highVac;
+	curr = low;
+	while (curr < highVac)
+	{
+		if (E[curr] >= pivot)
+		{
+			E[highVac] = E[curr];
+			lowVac = curr;
+			s.count++;
+			break;
+		}
+		curr++;
+	}
+	return lowVac;
+}
+
+int sort::partition(int E[], int pivot, int first, int last)
+{
+	int low, high;
+	low = first;
+	high = last;
+	while (low < high)
+	{
+		int highVac = extendLargeRegion(E, pivot, low, high);
+		int lowVac = extendSmallRegion(E, pivot, low + 1, highVac);
+		low = lowVac;
+		high = highVac - 1;
+	}
+	return low;
+}
+
+void sort::QS(int E[], int first, int last)
+{
+	int pivot;
+	if (first < last)
+	{
+		pivot = E[first];
+		int splitpt = partition(E, pivot, first, last);
+		E[splitpt] = pivot;
+		QS(E, first, splitpt - 1);
+		QS(E, splitpt + 1, last);
+	}
+}
+
+void sort::merge(int a[], int low, int high, int mid)
+{
+	int i, j, k, temp[high - low + 1];
+	i = low;
+	k = 0;
+	j = mid + 1;
+	while (i <= mid && j <= high)
+	{
+		if (a[i] < a[j])
+		{
+			s.count++;
+			temp[k] = a[i];
+			k++;
+			i++;
+		}
+		else
+		{
+			s.count++;
+			temp[k] = a[j];
+			k++;
+			j++;
+		}
+	}
+
+	while (i <= mid)
+	{
+		s.count++;
+		temp[k] = a[i];
+		k++;
+		i++;
+	}
+	while (j <= high)
+	{
+		s.count++;
+		temp[k] = a[j];
+		k++;
+		j++;
+	}
+	for (i = low; i <= high; i++)
+	{
+		a[i] = temp[i - low];
+	}
+}
+void sort::mergesort(int a[], int low, int high)
+{
+	int mid;
+	if (low < high)
+	{
+		mid = (low + high) / 2;
+		mergesort(a, low, mid);
+		mergesort(a, mid + 1, high);
+		merge(a, low, high, mid);
 	}
 }
