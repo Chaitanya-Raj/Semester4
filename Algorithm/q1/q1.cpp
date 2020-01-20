@@ -5,7 +5,7 @@ using namespace std;
 class sort
 {
 public:
-	int arr[30];
+	int arr[10];
 	int size;
 	int count;
 	void input();
@@ -19,16 +19,18 @@ public:
 	void QS(int[], int, int);
 	void merge(int[], int, int, int);
 	void mergesort(int[], int, int);
+	void generate(int[], int, int);
+	void swap(int[], int, int);
 	sort()
 	{
-		size = 30;
+		size = 10;
 		count = 0;
 	}
 } s;
 
 int main()
 {
-	int choice;
+	int casechoice, choice;
 	char ch;
 	do
 	{
@@ -40,73 +42,92 @@ int main()
 		cout << "5. merge sort " << endl;
 		cin >> choice;
 
-		for (int i = 0; i < s.size; i++)
-			s.arr[i] = i + 1;
+		cout << "\n\nWhich case do you want to see:" << endl;
+		cout << "1. Best Case" << endl;
+		cout << "2. Worst Case" << endl;
+		cout << "3. Average Case" << endl;
+		cin >> casechoice;
 
-		cout << "\n\nBest Case\n";
-		cout << "\n\nBefore sort\n";
-		for (int i = 0; i < s.size; i++)
-			cout << "\t" << s.arr[i];
+		int x = 10;
 
-		if (choice == 1)
-			s.bubbleSort();
-		else if (choice == 2)
-			s.insertionSort();
-		else if (choice == 3)
-			s.selectionSort();
-		else if (choice == 4)
+		switch (casechoice)
 		{
-			s.count = 0;
-			s.QS(s.arr, 0, s.size - 1);
-		}
-		else if (choice == 5)
-		{
-			s.count = 0;
-			s.mergesort(s.arr, 0, s.size - 1);
-		}
+		case 1:
+			for (int i = 0; i < s.size; i++)
+				s.arr[i] = i + 1;
+			if (choice == 4)
+			{
+				s.generate(s.arr, 0, s.size - 1);
+				for (int i = 0; i < s.size; i++)
+					cout << s.arr[i];
+			}
 
-		cout << "\n\nAfter sort\n";
-		for (int i = 0; i < s.size; i++)
-			cout << "\t" << s.arr[i];
+			cout << "\n\nBest Case\n";
+			cout << "\n\nBefore sort\n";
+			for (int i = 0; i < s.size; i++)
+				cout << "\t" << s.arr[i];
 
-		cout << "\n\nNumber of comparisons : " << s.count << endl;
+			if (choice == 1)
+				s.bubbleSort();
+			else if (choice == 2)
+				s.insertionSort();
+			else if (choice == 3)
+				s.selectionSort();
+			else if (choice == 4)
+			{
+				s.count = 0;
+				s.QS(s.arr, 0, s.size - 1);
+			}
+			else if (choice == 5)
+			{
+				s.count = 0;
+				s.mergesort(s.arr, 0, s.size - 1);
+			}
 
-		int x = 30;
-		for (int i = 0; i < s.size; i++)
-			s.arr[i] = x--;
+			cout << "\n\nAfter sort\n";
+			for (int i = 0; i < s.size; i++)
+				cout << "\t" << s.arr[i];
 
-		cout << "\n\nWorst Case\n";
-		cout << "\n\nBefore sort\n";
-		for (int i = 0; i < s.size; i++)
-			cout << "\t" << s.arr[i];
+			cout << "\n\nNumber of comparisons : " << s.count << endl;
 
-		if (choice == 1)
-			s.bubbleSort();
-		else if (choice == 2)
-			s.insertionSort();
-		else if (choice == 3)
-			s.selectionSort();
-		else if (choice == 4)
-		{
-			s.count = 0;
-			s.QS(s.arr, 0, s.size - 1);
-		}
-		else if (choice == 5)
-		{
-			s.count = 0;
-			s.mergesort(s.arr, 0, s.size - 1);
-		}
+			break;
 
-		cout << "\n\nAfter sort\n";
-		for (int i = 0; i < s.size; i++)
-			cout << "\t" << s.arr[i];
+		case 2:
+			for (int i = 0; i < s.size; i++)
+				s.arr[i] = x--;
 
-		cout << "\n\nNumber of comparisons : " << s.count << endl;
+			cout << "\n\nWorst Case\n";
+			cout << "\n\nBefore sort\n";
+			for (int i = 0; i < s.size; i++)
+				cout << "\t" << s.arr[i];
 
-		cout << "\n\nRandom Cases\n";
+			if (choice == 1)
+				s.bubbleSort();
+			else if (choice == 2)
+				s.insertionSort();
+			else if (choice == 3)
+				s.selectionSort();
+			else if (choice == 4)
+			{
+				s.count = 0;
+				s.QS(s.arr, 0, s.size - 1);
+			}
+			else if (choice == 5)
+			{
+				s.count = 0;
+				s.mergesort(s.arr, 0, s.size - 1);
+			}
 
-		for (int j = 0; j < 8; j++)
-		{
+			cout << "\n\nAfter sort\n";
+			for (int i = 0; i < s.size; i++)
+				cout << "\t" << s.arr[i];
+
+			cout << "\n\nNumber of comparisons : " << s.count << endl;
+
+			break;
+
+		case 3:
+			cout << "\n\nRandom Case\n";
 			s.count = 0;
 			for (int i = 0; i < s.size; i++)
 			{
@@ -138,9 +159,15 @@ int main()
 				cout << "\t" << s.arr[i];
 
 			cout << "\n\nNumber of comparisons : " << s.count << endl;
+
+			break;
+
+		default:
+			cout << "invalid choice";
 		}
 		cout << "If you wish to continue then press y " << endl;
 		cin >> ch;
+		cout << "\n\n";
 	} while (ch == 'y' || ch == 'Y');
 	return 0;
 }
@@ -221,6 +248,7 @@ int sort::extendLargeRegion(int E[], int pivot, int lowVac, int high)
 	curr = high;
 	while (curr > lowVac)
 	{
+		count++;
 		if (E[curr] < pivot)
 		{
 			E[lowVac] = E[curr];
@@ -239,6 +267,7 @@ int sort::extendSmallRegion(int E[], int pivot, int low, int highVac)
 	curr = low;
 	while (curr < highVac)
 	{
+		count++;
 		if (E[curr] >= pivot)
 		{
 			E[highVac] = E[curr];
@@ -257,7 +286,7 @@ int sort::partition(int E[], int pivot, int first, int last)
 	high = last;
 	while (low < high)
 	{
-		count++;
+
 		int highVac = extendLargeRegion(E, pivot, low, high);
 		int lowVac = extendSmallRegion(E, pivot, low + 1, highVac);
 		low = lowVac;
@@ -277,6 +306,24 @@ void sort::QS(int E[], int first, int last)
 		QS(E, first, splitpt - 1);
 		QS(E, splitpt + 1, last);
 	}
+}
+
+void sort::generate(int arr[], int start, int end)
+{
+	int c = end - start;
+	if (c < 3)
+		return;
+	int mid = (start + end) / 2;
+	generate(arr, start, mid);
+	swap(arr, start, mid);
+	generate(arr, ++mid, end);
+}
+
+void sort::swap(int arr[], int i, int j)
+{
+	int t = arr[i];
+	arr[i] = arr[j];
+	arr[j] = t;
 }
 
 void sort::merge(int a[], int low, int high, int mid)
