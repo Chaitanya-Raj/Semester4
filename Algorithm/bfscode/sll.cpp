@@ -42,19 +42,21 @@ public:
             ;
         }
     }
-    void deletionHead()
+    int deletionHead()
     {
         if (head != NULL)
         {
             Node<T> *delnode = head;
-            cout << "element deleted " << head->data;
+            //cout << "element deleted " << head->data;
             head = head->next;
+            int temp = delnode->data;
             delnode->next = NULL;
             delete delnode;
+            return temp;
         }
         else
         {
-            cout << "List empty";
+            //cout << "List empty";
         }
     }
     void deletionTail()
@@ -64,7 +66,7 @@ public:
             if (head->next == NULL)
             {
                 Node<T> *delnode = head;
-                cout << "element deleted " << head->data;
+                //cout << "element deleted " << head->data;
                 head = NULL;
                 delete delnode;
             }
@@ -73,7 +75,7 @@ public:
                 Node<T> *temp = head;
                 while (temp->next->next != NULL)
                     temp = temp->next;
-                cout << "element deleted " << temp->next->data;
+                //cout << "element deleted " << temp->next->data;
                 Node<T> *delnode = temp->next;
                 delete delnode;
                 temp->next = NULL;
@@ -81,7 +83,7 @@ public:
         }
         else
         {
-            cout << "List empty";
+            //cout << "List empty";
         }
     }
     void display()

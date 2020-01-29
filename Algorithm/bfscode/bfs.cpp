@@ -1,7 +1,34 @@
 #include <iostream>
 #include "sll.cpp"
-#include "queue.cpp"
 using namespace std;
+
+void bfs(LinkedList<int> l[], int n, int s)
+{
+    bool *discovered = new bool[n];
+    for (int i = 0; i < n; i++)
+        discovered[i] = false;
+
+    LinkedList<int> q;
+
+    discovered[s] = true;
+    q.insertionTail(s);
+
+    while (q.head)
+    {
+        s = q.deletionHead();
+        cout << s << " ";
+        Node<int> *temp = l[s].head;
+        while (temp != NULL)
+        {
+            if (!discovered[temp->data])
+            {
+                discovered[temp->data] = true;
+                q.insertionTail(temp->data);
+            }
+            temp = temp->next;
+        }
+    }
+}
 
 int main()
 {
@@ -29,27 +56,11 @@ int main()
         cout << endl;
         l[i].display();
     }
-
-    bool discovered[n];
-    Queue<int> q(100);
-    q.enqueue(0);
-    discovered[0] = true;
-    cout << "\n BFS is \n";
-    while (q.front != -1)
-    {
-        int x = q.dequeue();
-        cout << "\t" << x;
-        Node<int> *temp = l[x].head;
-        while (temp != NULL)
-        {
-            if (discovered[temp->data])
-            {
-                q.enqueue(temp->data);
-                discovered[temp->data] = true;
-            }
-            temp = temp->next;
-        }
-    }
+    cout << "\n\nChoose source vertex : ";
+    int s;
+    cin >> s;
+    cout << "\n\n";
+    bfs(l, n, s);
     cout << endl;
     return 0;
 }
