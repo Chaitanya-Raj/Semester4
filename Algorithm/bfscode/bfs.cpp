@@ -14,7 +14,7 @@ void bfs(LinkedList<int> l[], int n, int s)
     q.insertionTail(s);
 
     while (q.head)
-    {
+    {   
         s = q.deletionHead();
         cout << s << " ";
         Node<int> *temp = l[s].head;
