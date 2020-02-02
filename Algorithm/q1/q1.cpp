@@ -5,7 +5,7 @@ using namespace std;
 class sort
 {
 public:
-	int arr[10];
+	int *arr;
 	int size;
 	int count;
 	void input();
@@ -16,14 +16,13 @@ public:
 	int extendLargeRegion(int[], int, int, int);
 	int extendSmallRegion(int[], int, int, int);
 	int partition(int[], int, int, int);
-	void QS(int[], int, int);
+	void quickSort(int[], int, int);
 	void merge(int[], int, int, int);
-	void mergesort(int[], int, int);
+	void mergeSort(int[], int, int);
 	void generate(int[], int, int);
 	void swap(int[], int, int);
 	sort()
 	{
-		size = 10;
 		count = 0;
 	}
 } s;
@@ -34,6 +33,9 @@ int main()
 	char ch;
 	do
 	{
+		cout << "Enter the size of array :";
+		cin >> s.size;
+		s.arr = new int[s.size];
 		cout << "Enter your choice among following " << endl;
 		cout << "1. bubble sort " << endl;
 		cout << "2. insertion sort " << endl;
@@ -48,7 +50,7 @@ int main()
 		cout << "3. Average Case" << endl;
 		cin >> casechoice;
 
-		int x = 10;
+		int x = s.size;
 
 		switch (casechoice)
 		{
@@ -76,12 +78,12 @@ int main()
 			else if (choice == 4)
 			{
 				s.count = 0;
-				s.QS(s.arr, 0, s.size - 1);
+				s.quickSort(s.arr, 0, s.size - 1);
 			}
 			else if (choice == 5)
 			{
 				s.count = 0;
-				s.mergesort(s.arr, 0, s.size - 1);
+				s.mergeSort(s.arr, 0, s.size - 1);
 			}
 
 			cout << "\n\nAfter sort\n";
@@ -110,12 +112,12 @@ int main()
 			else if (choice == 4)
 			{
 				s.count = 0;
-				s.QS(s.arr, 0, s.size - 1);
+				s.quickSort(s.arr, 0, s.size - 1);
 			}
 			else if (choice == 5)
 			{
 				s.count = 0;
-				s.mergesort(s.arr, 0, s.size - 1);
+				s.mergeSort(s.arr, 0, s.size - 1);
 			}
 
 			cout << "\n\nAfter sort\n";
@@ -146,12 +148,12 @@ int main()
 			else if (choice == 4)
 			{
 				s.count = 0;
-				s.QS(s.arr, 0, s.size - 1);
+				s.quickSort(s.arr, 0, s.size - 1);
 			}
 			else if (choice == 5)
 			{
 				s.count = 0;
-				s.mergesort(s.arr, 0, s.size - 1);
+				s.mergeSort(s.arr, 0, s.size - 1);
 			}
 
 			cout << "\n\nAfter sort\n";
@@ -295,7 +297,7 @@ int sort::partition(int E[], int pivot, int first, int last)
 	return low;
 }
 
-void sort::QS(int E[], int first, int last)
+void sort::quickSort(int E[], int first, int last)
 {
 	int pivot;
 	if (first < last)
@@ -303,8 +305,8 @@ void sort::QS(int E[], int first, int last)
 		pivot = E[first];
 		int splitpt = partition(E, pivot, first, last);
 		E[splitpt] = pivot;
-		QS(E, first, splitpt - 1);
-		QS(E, splitpt + 1, last);
+		quickSort(E, first, splitpt - 1);
+		quickSort(E, splitpt + 1, last);
 	}
 }
 
@@ -369,14 +371,14 @@ void sort::merge(int a[], int low, int high, int mid)
 		a[i] = temp[i - low];
 	}
 }
-void sort::mergesort(int a[], int low, int high)
+void sort::mergeSort(int a[], int low, int high)
 {
 	int mid;
 	if (low < high)
 	{
 		mid = (low + high) / 2;
-		mergesort(a, low, mid);
-		mergesort(a, mid + 1, high);
+		mergeSort(a, low, mid);
+		mergeSort(a, mid + 1, high);
 		merge(a, low, high, mid);
 	}
 }
