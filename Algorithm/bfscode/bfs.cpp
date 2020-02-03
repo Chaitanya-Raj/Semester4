@@ -14,7 +14,7 @@ void bfs(LinkedList<int> l[], int n, int s)
     q.insertionTail(s);
 
     while (q.head)
-    {   
+    {
         s = q.deletionHead();
         cout << s << " ";
         Node<int> *temp = l[s].head;
@@ -32,6 +32,11 @@ void bfs(LinkedList<int> l[], int n, int s)
 
 int main()
 {
+    cout << "\nChoose one of the following : \n";
+    cout << "1.Undirected\n";
+    cout << "2.Directed\n";
+    int choice;
+    cin >> choice;
     cout << "\nEnter number of vertices : ";
     int n;
     cin >> n;
@@ -49,7 +54,8 @@ int main()
         if (x == -1 || y == -1)
             break;
         l[x].insertionTail(y);
-        l[y].insertionTail(x);
+        if (choice == 1)
+            l[y].insertionTail(x);
     };
     for (int i = 0; i < n; i++)
     {
