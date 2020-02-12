@@ -2,59 +2,30 @@
 #include "sll.cpp"
 using namespace std;
 
-void bfs(LinkedList<int> l[], int n, int s)
+void DFSUtil(LinkedList<int> l[], int n, int v, bool visited[])
 {
-    bool *discovered = new bool[n];
-    for (int i = 0; i < n; i++)
-        discovered[i] = false;
+    visited[v] = true;
+    cout << v << " ";
 
-    LinkedList<int> q;
-
-    discovered[s] = true;
-    q.insertionTail(s);
-
-    while (q.head)
+    Node<int> *temp = l[v].head;
+    while (temp != NULL)
     {
-        s = q.deletionHead();
-        cout << s << " ";
-        Node<int> *temp = l[s].head;
-         while (temp != NULL)
-         {
-            if (!discovered[temp->data])
-            {
-                discovered[temp->data] = true;
-                q.insertionTail(temp->data);
-            }
-            temp = temp->next;
+        if (!visited[temp->data])
+        {
+            DFSUtil(l, n, temp->data, visited);
         }
+        temp = temp->next;
     }
 }
 
-void DFSUtil(int v, bool visited[]) 
-{ 
-    visited[v] = true; 
-    cout << v << " "; 
-  
-    Node<int> *temp = l[s].head;
-         while (temp != NULL)
-         {
-             if (!visited[temp->data])
-             {
-                 DFSUtil(temp->data, visited);
-             }
-             temp = temp->next;
-} 
-  
-// DFS traversal of the vertices reachable from v. 
-// It uses recursive DFSUtil() 
-void DFS(int v) 
-{ 
-    bool *visited = new bool[V]; 
-    for (int i = 0; i < V; i++) 
-        visited[i] = false; 
-  
-    DFSUtil(v, visited); 
-} 
+void DFS(LinkedList<int> l[], int n, int v)
+{
+    bool *visited = new bool[n];
+    for (int i = 0; i < n; i++)
+        visited[i] = false;
+
+    DFSUtil(l, n, v, visited);
+}
 
 int main()
 {
@@ -92,7 +63,7 @@ int main()
     int s;
     cin >> s;
     cout << "\n\n";
-    bfs(l, n, s);
+    DFS(l, n, s);
     cout << endl;
     return 0;
 }
