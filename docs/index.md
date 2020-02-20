@@ -20,7 +20,7 @@ To import the above databases, follow these steps :
 
 2. Download the ques_num.sql file corresponding to the required database to the home folder.
 
-3. Open a terminal and type in this command (replace num with the question number):
+3. Open a terminal and type in this command (replace nameofdatabase with the created database name and num with the question number):
 
     ```bash
     /opt/lampp/bin/mysql -u root -p -Dnameofdatabase < ques_num.sql
