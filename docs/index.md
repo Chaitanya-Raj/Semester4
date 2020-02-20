@@ -22,21 +22,21 @@ To import the above databases, follow these steps :
 
 3. Open a terminal and type in this command (replace num with the question number):
 
-```bash
-/opt/lampp/bin/mysql -u root -p -Dnameofdatabase < ques_num.sql
- ```
+    ```bash
+    /opt/lampp/bin/mysql -u root -p -Dnameofdatabase < ques_num.sql
+    ```
 
 4. Start up the mysql prompt using this command:
 
-```bash
-/opt/lampp/bin/mysql -u root
-```
+    ```bash
+    /opt/lampp/bin/mysql -u root
+    ```
 
 5. Type this command (replace num with the question number):
 
-```sql
-source ~/ques_num.sql;
-```
+    ```sql
+    source ~/ques_num.sql;
+    ```
 
 ## [PHP](https://github.com/Chaitanya-Raj/Semester4/tree/master/PHP)
 
