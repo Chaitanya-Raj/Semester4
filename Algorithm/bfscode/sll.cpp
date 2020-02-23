@@ -17,13 +17,13 @@ public:
     {
         head = NULL;
     }
-    void insertionHead(T n)
-    {
-        Node<T> *temp = new Node<T>;
-        temp->data = n;
-        temp->next = head;
-        head = temp;
-    }
+    // void insertionHead(T n)
+    // {
+    //     Node<T> *temp = new Node<T>;
+    //     temp->data = n;
+    //     temp->next = head;
+    //     head = temp;
+    // }
     void insertionTail(T n)
     {
         Node<T> *temp = new Node<T>;
@@ -59,33 +59,33 @@ public:
             //cout << "List empty";
         }
     }
-    void deletionTail()
-    {
-        if (head != NULL)
-        {
-            if (head->next == NULL)
-            {
-                Node<T> *delnode = head;
-                //cout << "element deleted " << head->data;
-                head = NULL;
-                delete delnode;
-            }
-            else
-            {
-                Node<T> *temp = head;
-                while (temp->next->next != NULL)
-                    temp = temp->next;
-                //cout << "element deleted " << temp->next->data;
-                Node<T> *delnode = temp->next;
-                delete delnode;
-                temp->next = NULL;
-            }
-        }
-        else
-        {
-            //cout << "List empty";
-        }
-    }
+    // void deletionTail()
+    // {
+    //     if (head != NULL)
+    //     {
+    //         if (head->next == NULL)
+    //         {
+    //             Node<T> *delnode = head;
+    //             //cout << "element deleted " << head->data;
+    //             head = NULL;
+    //             delete delnode;
+    //         }
+    //         else
+    //         {
+    //             Node<T> *temp = head;
+    //             while (temp->next->next != NULL)
+    //                 temp = temp->next;
+    //             //cout << "element deleted " << temp->next->data;
+    //             Node<T> *delnode = temp->next;
+    //             delete delnode;
+    //             temp->next = NULL;
+    //         }
+    //     }
+    //     else
+    //     {
+    //         //cout << "List empty";
+    //     }
+    // }
     void display()
     {
         Node<T> *temp = head;
