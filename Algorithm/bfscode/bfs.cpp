@@ -8,25 +8,31 @@ void bfs(LinkedList<int> l[], int n, int s)
     for (int i = 0; i < n; i++)
         discovered[i] = false;
 
-    LinkedList<int> q;
-
+    LinkedList<int> q, x[n];
+    for (int i = 0; i < n; i++)
+        x[i].insertionTail(i);
     discovered[s] = true;
     q.insertionTail(s);
 
     while (q.head)
     {
         s = q.deletionHead();
-        cout << s << " ";
         Node<int> *temp = l[s].head;
         while (temp != NULL)
         {
             if (!discovered[temp->data])
             {
+                x[s].insertionTail(temp->data);
                 discovered[temp->data] = true;
                 q.insertionTail(temp->data);
             }
             temp = temp->next;
         }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        x[i].display();
+        cout << endl;
     }
 }
 
@@ -56,7 +62,7 @@ int main()
         l[x].insertionTail(y);
         if (choice == 1)
             l[y].insertionTail(x);
-    };
+    }
     for (int i = 0; i < n; i++)
     {
         cout << endl;

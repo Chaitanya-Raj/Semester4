@@ -2,29 +2,33 @@
 #include "sll.cpp"
 using namespace std;
 
-void DFSUtil(LinkedList<int> l[], int n, int v, bool visited[])
+void DFSUtil(LinkedList<int> l[], int n, int s, LinkedList<int> x[], bool discovered[])
 {
-    visited[v] = true;
-    cout << v << " ";
-
-    Node<int> *temp = l[v].head;
+    discovered[s] = true;
+    Node<int> *temp = l[s].head;
     while (temp != NULL)
     {
-        if (!visited[temp->data])
+        if (!discovered[temp->data])
         {
-            DFSUtil(l, n, temp->data, visited);
+            x[s].insertionTail(temp->data);
+            DFSUtil(l, n, temp->data, x, discovered);
         }
         temp = temp->next;
     }
 }
 
-void DFS(LinkedList<int> l[], int n, int v)
+void DFS(LinkedList<int> l[], int n, int s, LinkedList<int> x[])
 {
-    bool *visited = new bool[n];
+    bool *discovered = new bool[n];
     for (int i = 0; i < n; i++)
-        visited[i] = false;
+        discovered[i] = false;
 
-    DFSUtil(l, n, v, visited);
+    DFSUtil(l, n, s, x, discovered);
+    for (int i = 0; i < n; i++)
+    {
+        x[i].display();
+        cout << endl;
+    }
 }
 
 int main()
@@ -37,9 +41,12 @@ int main()
     cout << "\nEnter number of vertices : ";
     int n;
     cin >> n;
-    LinkedList<int> l[n];
+    LinkedList<int> l[n], x[n];
     for (int i = 0; i < n; i++)
+    {
         l[i].insertionTail(i);
+        x[i].insertionTail(i);
+    }
     cout << "\nEnter the edges(0 to " << n - 1 << ") : ";
     while (true)
     {
@@ -63,7 +70,7 @@ int main()
     int s;
     cin >> s;
     cout << "\n\n";
-    DFS(l, n, s);
+    DFS(l, n, s, x);
     cout << endl;
     return 0;
 }
