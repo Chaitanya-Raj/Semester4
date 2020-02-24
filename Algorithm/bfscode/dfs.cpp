@@ -17,8 +17,13 @@ void DFSUtil(LinkedList<int> l[], int n, int s, LinkedList<int> x[], bool discov
     }
 }
 
-void DFS(LinkedList<int> l[], int n, int s, LinkedList<int> x[])
+void DFS(LinkedList<int> l[], int n, int s)
 {
+    LinkedList<int> x[n];
+    for (int i = 0; i < n; i++)
+    {
+        x[i].insertionTail(i);
+    }
     bool *discovered = new bool[n];
     for (int i = 0; i < n; i++)
         discovered[i] = false;
@@ -45,7 +50,6 @@ int main()
     for (int i = 0; i < n; i++)
     {
         l[i].insertionTail(i);
-        x[i].insertionTail(i);
     }
     cout << "\nEnter the edges(0 to " << n - 1 << ") : ";
     while (true)
@@ -66,11 +70,16 @@ int main()
         cout << endl;
         l[i].display();
     }
-    cout << "\n\nChoose source vertex : ";
     int s;
-    cin >> s;
-    cout << "\n\n";
-    DFS(l, n, s, x);
-    cout << endl;
+    while (true)
+    {
+        cout << "\n\nChoose source vertex : ";
+        cin >> s;
+        if (s == -1)
+            break;
+        cout << "\n\n";
+        DFS(l, n, s);
+        cout << endl;
+    }
     return 0;
 }

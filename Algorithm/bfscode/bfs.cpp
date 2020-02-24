@@ -68,11 +68,16 @@ int main()
         cout << endl;
         l[i].display();
     }
-    cout << "\n\nChoose source vertex : ";
     int s;
-    cin >> s;
-    cout << "\n\n";
-    bfs(l, n, s);
-    cout << endl;
+    while (true)
+    {
+        cout << "\n\nChoose source vertex : ";
+        cin >> s;
+        if (s == -1)
+            break;
+        cout << "\n\n";
+        bfs(l, n, s);
+        cout << endl;
+    }
     return 0;
 }
