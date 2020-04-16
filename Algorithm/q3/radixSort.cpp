@@ -5,7 +5,6 @@ using namespace std;
 // A utility function to print an array
 void printArray(int A[], int n)
 {
-    cout << "The Sorted Array is : ";
     for (int i = 0; i < n; i++)
         cout << A[i] << " ";
 }
@@ -61,8 +60,6 @@ void radixsort(int A[], int n)
     // where i is current digit number
     for (int exp = 1; d / exp > 0; exp *= 10)
         countSort(A, n, exp);
-
-    printArray(A, n);
 }
 
 // Driver program to test above functions
@@ -71,10 +68,16 @@ int main()
     int n;
     cout << "Enter the size of the array : ";
     cin >> n;
+
     int A[n];
     cout << "Enter the elements of the array : " << endl;
     for (int i = 0; i < n; i++)
         cin >> A[i];
+
     radixsort(A, n);
+
+    cout << "The Sorted Array is : ";
+    printArray(A, n);
+
     return 0;
 }
