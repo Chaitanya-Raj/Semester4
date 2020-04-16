@@ -1,7 +1,13 @@
-
 // C++ implementation of Radix Sort
 #include <iostream>
 using namespace std;
+
+// A utility function to print an array
+void printArray(int arr[], int n)
+{
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+}
 
 // A utility function to get maximum value in arr[]
 int getMax(int arr[], int n)
@@ -54,13 +60,8 @@ void radixsort(int arr[], int n)
     // where i is current digit number
     for (int exp = 1; m / exp > 0; exp *= 10)
         countSort(arr, n, exp);
-}
 
-// A utility function to print an array
-void print(int arr[], int n)
-{
-    for (int i = 0; i < n; i++)
-        cout << arr[i] << " ";
+    printArray(arr, n);
 }
 
 // Driver program to test above functions
@@ -69,6 +70,5 @@ int main()
     int arr[] = {170, 45, 75, 90, 802, 24, 2, 66};
     int n = sizeof(arr) / sizeof(arr[0]);
     radixsort(arr, n);
-    print(arr, n);
     return 0;
 }
