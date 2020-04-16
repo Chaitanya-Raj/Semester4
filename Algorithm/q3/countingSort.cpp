@@ -15,8 +15,8 @@ void countSort(int A[], int n)
     int k = A[0];
     for (int i = 1; i < n; i++)
     {
-        if (A[i] > max)
-            max = A[i];
+        if (A[i] > k)
+            k = A[i];
     }
 
     for (int i = 0; i <= k; ++i)
@@ -37,12 +37,25 @@ void countSort(int A[], int n)
         B[C[A[i]] - 1] = A[i];
         C[A[i]]--;
     }
-    printArray(B, n);
+    for (int i = 0; i < n; i++)
+        A[i] = B[i];
 }
 
 int main()
 {
-    int A[] = {4, 2, 2, 8, 3, 3, 1};
-    int n = sizeof(A) / sizeof(A[0]);
+    int n;
+    cout << "Enter the size of the array : ";
+    cin >> n;
+
+    int A[n];
+    cout << "Enter the elements of the array : " << endl;
+    for (int i = 0; i < n; i++)
+        cin >> A[i];
+
     countSort(A, n);
+
+    cout << "The Sorted Array is : ";
+    printArray(A, n);
+
+    return 0;
 }
