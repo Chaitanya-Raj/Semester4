@@ -3,72 +3,78 @@
 using namespace std;
 
 // A utility function to print an array
-void printArray(int arr[], int n)
+void printArray(int A[], int n)
 {
+    cout << "The Sorted Array is : ";
     for (int i = 0; i < n; i++)
-        cout << arr[i] << " ";
+        cout << A[i] << " ";
 }
 
 // A utility function to get maximum value in arr[]
-int getMax(int arr[], int n)
+int getMax(int A[], int n)
 {
-    int mx = arr[0];
+    int mx = A[0];
     for (int i = 1; i < n; i++)
-        if (arr[i] > mx)
-            mx = arr[i];
+        if (A[i] > mx)
+            mx = A[i];
     return mx;
 }
 
 // A function to do counting sort of arr[] according to
 // the digit represented by exp.
-void countSort(int arr[], int n, int exp)
+void countSort(int A[], int n, int exp)
 {
-    int output[n]; // output array
-    int i, count[10] = {0};
+    int B[n]; // output array
+    int i, C[10] = {0};
 
     // Store count of occurrences in count[]
     for (i = 0; i < n; i++)
-        count[(arr[i] / exp) % 10]++;
+        C[(A[i] / exp) % 10]++;
 
     // Change count[i] so that count[i] now contains actual
     //  position of this digit in output[]
     for (i = 1; i < 10; i++)
-        count[i] += count[i - 1];
+        C[i] += C[i - 1];
 
     // Build the output array
     for (i = n - 1; i >= 0; i--)
     {
-        output[count[(arr[i] / exp) % 10] - 1] = arr[i];
-        count[(arr[i] / exp) % 10]--;
+        B[C[(A[i] / exp) % 10] - 1] = A[i];
+        C[(A[i] / exp) % 10]--;
     }
 
     // Copy the output array to arr[], so that arr[] now
     // contains sorted numbers according to current digit
     for (i = 0; i < n; i++)
-        arr[i] = output[i];
+        A[i] = B[i];
 }
 
 // The main function to that sorts arr[] of size n using
 // Radix Sort
-void radixsort(int arr[], int n)
+void radixsort(int A[], int n)
 {
     // Find the maximum number to know number of digits
-    int m = getMax(arr, n);
+    int d = getMax(A, n);
 
     // Do counting sort for every digit. Note that instead
     // of passing digit number, exp is passed. exp is 10^i
     // where i is current digit number
-    for (int exp = 1; m / exp > 0; exp *= 10)
-        countSort(arr, n, exp);
+    for (int exp = 1; d / exp > 0; exp *= 10)
+        countSort(A, n, exp);
 
-    printArray(arr, n);
+    printArray(A, n);
 }
 
 // Driver program to test above functions
 int main()
 {
-    int arr[] = {170, 45, 75, 90, 802, 24, 2, 66};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    radixsort(arr, n);
+    int n;
+    cout << "Enter the size of the array : ";
+    cin >> n;
+    int A[n];
+    cout << "Enter the elements of the array : " << endl;
+    for (int i = 0; i < n; i++)
+        cin >> A[i];
+    radixsort(A, n);
     return 0;
 }
