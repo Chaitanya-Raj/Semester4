@@ -1,6 +1,3 @@
-// Chaitanya Raj
-// 18/94067
-
 #include <iostream>
 using namespace std;
 
